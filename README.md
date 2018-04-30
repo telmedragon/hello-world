@@ -1,3 +1,3 @@
-# hello-world
+# inits
 
-I'm a coding noob
+vim settings and such
