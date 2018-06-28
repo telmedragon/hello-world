@@ -4,6 +4,12 @@
 nnoremap ' `
 nnoremap ` '
 
+" Auto parantheses/brackets
+" insert mode remap
+inoremap (    ()<Esc>hi
+inoremap [    []<Esc>hi
+inoremap {    {}<Esc>hi
+
 " Use vim settings over Vi
 set nocompatible
 
