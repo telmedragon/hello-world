@@ -42,6 +42,7 @@ my $renamed;
 my $imdb_url = "https://www.imdb.com/";
 my $mech = WWW::Mechanize->new(autocheck => 1);
 
+
 sub check_imdb() {
 # Goes to home page of IMDB
   $mech->get($imdb_url);
@@ -89,18 +90,24 @@ sub check_imdb() {
 #close(FH);
 }
 
-=nope
 sub search_n_log() {
   # If this is an orphaned file. Orphaned is when the video file itself exists in the Movie/Anime/TV Shows.
   # Orphaned is identified when it has a video file extension and exists in Movie/Anime/TV Shows without it's own
   # wrapper folder
-  say "The file is named: $_";
-  if ( /.(avi|mkv|mp4)/   and 
-      -f ($_)             and
-      ((split '/', cwd())[-1] eq 'Movies')
-    ) {
-    say "The file is named: $_";
-
+  my $stripped_name;
+  if ( -d $_) {
+    say "The directory is named: $_";
+  }
+  if ( /.(avi|mkv|mp4|mpg|mpeg|wmv)/   and 
+       -f ($_)                          and
+       ((split '/', cwd())[-1] eq 'Movies')
+     ) {
+      $stripped_name = $_;
+      say "The extension is named: $1";
+      say "The file is named: $_";
+      $stripped_name =~ s/.(avi|mkv|mp4|mpg|mpeg|wmv)//; 
+      say "The stripped name: $stripped_name";
+      `mkdir "$stripped_name"`;
   }
   if ( -d "Dunkirk (2017)") {
     say "hello";
@@ -108,10 +115,7 @@ sub search_n_log() {
 
   
 }
-=cut
 
 # This function cleans the title of the file
 # so that I can give a clean string to IMDB
-sub name_cleaner() {
-}
-#find(\&search_n_log, $stardir)
+find(\&search_n_log, $stardir)
