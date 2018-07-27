@@ -1,3 +1,4 @@
 # My own aliases
 alias g='gvim'
-alias l='ls -altrh --color=auto'
+alias l='ls -ltrh --color=auto'
+alias la='ls -altrh --color=auto'
